@@ -2,25 +2,29 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle: <a href='https://www.jhu.edu/'>Johns Hopkins University</a>.
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   address: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>Baltimore, MD 21218</p>
 
 news: true  # includes a list of news items
-latest_posts: true  # includes a list of the newest posts
+latest_posts: false  # includes a list of the newest posts
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+My name is Tianjian Li. I have received my B.A. in Mathematics and Computer Science from New York University. I am now pursuing a M.S. degree at Johns Hopkins University. I am currently doing research on multilinguality and machine translation under the supervision of [Kenton Murray](https://kentonmurray.com/) and [Philipp Koehn](https://www.cs.jhu.edu/~phi/).
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+My research interests mainly lies in the intersection of deep learning and natural language processing, with a focus on NLP under multilingual settings. I aim answer these two questions:
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+- How to interpret parameter and data utility through the lens of machine translation?
+- How to build practical multilingual NLP systems with limited training data and computational resources?
+
+Previously, I was working as a research intern at the Knowledge Engineering Group of Tsinghua University, under the supervision of[Jie Tang](http://keg.cs.tsinghua.edu.cn/jietang/). I have built a 1B decoder-only multilingual language model mGLM, which excels in multilingual generation tasks due to its autoregressive denoising pre-train objective. mGLM is now [open sourced](https://github.com/THUDM/Multilingual-GLM).
+
+If you have anything to share with me, please feel free to contact me through my email: tli104@jhu.edu
+
