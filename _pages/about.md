@@ -8,8 +8,6 @@ profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
-  address: >
-    <p>Baltimore, MD 21218</p>
 
 news: true  # includes a list of news items
 latest_posts: false  # includes a list of the newest posts
@@ -21,8 +19,8 @@ My name is Tianjian Li. I have received my B.A. in Mathematics and Computer Scie
 
 My research interests mainly lies in the intersection of deep learning and natural language processing, with a focus on NLP under multilingual settings. I aim answer these two questions:
 
-- How to interpret parameter and data utility through the lens of machine translation?
-- How to build practical multilingual NLP systems with limited training data and computational resources?
+- How to measure parameter and data utility through the lens of machine translation?
+- How to build practical multilingual NLP systems with [limited training data](https://arxiv.org/abs/2305.17325) and computational resources?
 
 Previously, I was working as a research intern at the Knowledge Engineering Group of Tsinghua University, under the supervision of[Jie Tang](http://keg.cs.tsinghua.edu.cn/jietang/). I have built a 1B decoder-only multilingual language model mGLM, which excels in multilingual generation tasks due to its autoregressive denoising pre-train objective. mGLM is now [open sourced](https://github.com/THUDM/Multilingual-GLM).
 
