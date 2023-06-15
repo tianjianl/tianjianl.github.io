@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='https://www.jhu.edu/'>Johns Hopkins University</a>.
+subtitle: <a href='https://www.clsp.jhu.edu/'>Center for Speech and Language Processing</a>,  <a href='https://www.jhu.edu/'>Johns Hopkins University</a>
 
 profile:
   align: right
