@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='https://www.clsp.jhu.edu/'>Center for Speech and Language Processing</a>,  <a href='https://www.jhu.edu/'>Johns Hopkins University</a>
+subtitle: <a href='https://www.clsp.jhu.edu/'>Center for Language and Speech Processing</a>,  <a href='https://www.jhu.edu/'>Johns Hopkins University</a>
 
 profile:
   align: right
@@ -15,9 +15,9 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-My name is Tianjian Li. I have received my B.A. in Mathematics and Computer Science from New York University. I am now pursuing a M.S. degree at Johns Hopkins University. I am currently doing research on multilinguality and machine translation under the supervision of [Kenton Murray](https://kentonmurray.com/) and [Philipp Koehn](https://www.cs.jhu.edu/~phi/).
+My name is Tianjian Li. I have received my B.A. in Mathematics and Computer Science from New York University. I am now pursuing a M.S. degree at Johns Hopkins University. I am currently doing research on multilingual language models and machine translation under the supervision of [Kenton Murray](https://kentonmurray.com/) and [Philipp Koehn](https://www.cs.jhu.edu/~phi/).
 
-My research interests mainly lies in the intersection of deep learning and natural language processing, with a focus on NLP under multilingual settings. I aim answer these two questions:
+My research interests mainly lies in the intersection of deep learning and natural language processing, with a focus on NLP under multilingual settings. I aim to answer these two questions:
 
 - How to measure parameter and data utility through the lens of machine translation?
 - How to build practical multilingual NLP systems with [limited training data](https://arxiv.org/abs/2305.17325) and computational resources?
