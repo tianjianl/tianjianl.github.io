@@ -22,6 +22,8 @@ My research interests mainly lies in the intersection of deep learning and natur
 - How to measure parameter and data utility through the lens of machine translation?
 - How to build practical multilingual NLP systems with [limited training data](https://arxiv.org/abs/2305.17325) and computational resources?
 
+I prefer solutions that possess **simplicity**, exhibit strong **generalizability**, and grounded in **theory**.
+
 Previously, I was working as a research intern at the Knowledge Engineering Group of Tsinghua University, under the supervision of [Jie Tang](http://keg.cs.tsinghua.edu.cn/jietang/). I have built a 1B decoder-only multilingual language model mGLM, which excels in multilingual generation tasks due to its autoregressive denoising pre-train objective. mGLM is now [open sourced](https://github.com/THUDM/Multilingual-GLM).
 
 If you have anything to share with me, please feel free to contact me through my email: tli104@jhu.edu
