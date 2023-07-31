@@ -28,7 +28,7 @@ Where $$S$$ is the mini-batch in SGD or the entire training set in GD.
 
 Intuitively, the metric $$\Delta_t ((x, y), S)$$ measures the change in training loss when using an infinitesimal learning rate - the gradient flow. Now we bound the difference in loss of any example with an infinitesimal learning rate.
 
-**Theorem**: Up to a constant $$c$$, the change in loss for another example in the same batch under an infinitesimal learning rate setting when a specific datapoint in that batch is pruned is bouned by the gradient norm on that pruned example:
+**Theorem**: Up to a constant $$c$$, the change in loss for another example in the same batch under an infinitesimal learning rate setting when a specific datapoint in that batch is pruned is bounded by the gradient norm of that pruned example:
 
 $$\|\Delta_t((x,y),S) - \Delta_t((x, y), S_{\neg j})\| \leq c\|g_t(x_j, y_j)\|$$ 
 
@@ -58,7 +58,7 @@ However, suppose dataset pruning can beat scaling laws: we can train much better
 
 ## Influence Functions
 
-Another line of work [[Koh and Liang, 2017]([Understanding Black-box Predictions via Influence Functions](https://proceedings.mlr.press/v70/koh17a.html)), [Yang et al., 2023](https://arxiv.org/abs/2205.09329)] also estimates data utility by how much of a difference it makes when that specific datapoint is removed. However, instead of measuring the difference in **loss** as in the aforementioned works, they measure the difference in the **parameters**. Formally, if $$\hat{\theta}$$ and $$\hat{\theta}_{\neg z}$$ are the empirical risk minimizers of the training set with and without a certain datapoint $$z$$, respectively, we measure the difference to represent the utility of the datapoint $$z$$:
+Another line of work [[Koh and Liang, 2017](https://proceedings.mlr.press/v70/koh17a.html), [Yang et al., 2023](https://arxiv.org/abs/2205.09329)] also estimates data utility by how much of a difference it makes when that specific datapoint is removed. However, instead of measuring the difference in **loss** as in the aforementioned works, they measure the difference in the **parameters**. Formally, if $$\hat{\theta}$$ and $$\hat{\theta}_{\neg z}$$ are the empirical risk minimizers of the training set with and without a certain datapoint $$z$$, respectively, we measure the difference to represent the utility of the datapoint $$z$$:
 
 $$\mathcal{I}_\theta(z) = |\hat{\theta} - \hat{\theta}_{\neg z}|$$
 
@@ -74,7 +74,7 @@ Ultimately we care about the test performance. Applying the chain rule, we can a
 
 $$\mathcal{I}_{\textrm{upweight}}(z, z_\textrm{test}) = \frac{\textrm{d} \ell(z_\textrm{test}, \hat{\theta})}{\textrm{d} \hat{\theta}}\cdot \frac{\textrm{d} \hat{\theta}}{\textrm{d} \epsilon} =-\nabla_{\theta}\ell(z_\textrm{test}, \hat{\theta})^\top\mathcal{H}_{\hat{\theta}}^{-1}\nabla_{\theta}\ell(z, \hat{\theta})$$
 
-Here we are able to see that the difference in test loss is also upper bounded by the norm of the gradient on that particular training example scaled by constant factors. Moreover, it also shows whether pruning a particular example would improve or degrade test performance depends on **the dot product** **between the training and test gradients** - this is intuitive. Still, in practice, we cannot access the test set. Numerous works have used the dot product between the training gradient and development gradient as a proxy for data utility [[Wang et al., 2020a](https://arxiv.org/pdf/1911.10088.pdf), [Wang et al., 2020b](https://arxiv.org/pdf/2004.06748.pdf), [Yang et al., 2021](https://arxiv.org/pdf/2109.04778.pdf)]. Therefore, the influence function here takes three things into account for estimating data utility:
+Here we are able to see that the difference in test loss is also upper bounded by the norm of the gradient on that particular training example scaled by constant factors. Moreover, it also shows whether pruning a particular example would improve or degrade test performance depends on **the dot product** **between the training and test gradients** - this is intuitive. Still, in practice, we cannot access the test set. Numerous works have used the dot product between the training gradient and development gradient as a proxy for data utility [[Wang et al., 2020a](https://arxiv.org/abs/1911.10088), [Wang et al., 2020b](https://arxiv.org/abs/2004.06748), [Yang et al., 2021](https://arxiv.org/abs/2109.04778)]. Therefore, the influence function here takes three things into account for estimating data utility:
 
 - The similarity between training and test gradients $$\nabla_\theta\ell(z_\textrm{test}, \theta)^\top \nabla_\theta\ell(z, \hat{\theta})$$;
 - The local curvature of the loss function at the current training step $$\mathcal{H}^{-1}_{\hat{\theta}}$$;
