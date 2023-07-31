@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>On Different Perspectives of Measuring Data Utility | Tianjian  Li</title>
+    <meta name="author" content="Tianjian  Li">
+    <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+">
+    <meta name="keywords" content="Natural Language Processing, Machine Translation, Multilinguality">
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+
+    <!-- Bootstrap Table -->
+    <link defer rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
+
+    
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://tianjianl.github.io/blog/2023/dataset-pruning/">
+
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark">
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">Tianjian </span>Li</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">about</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">blog<span class="sr-only">(current)</span></a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/publications/">publications</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/assets/pdf/CV.pdf">cv</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <li class="toggle-container">
+                <button id="light-toggle" title="Change theme">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Scrolling Progress Bar -->
+      <progress id="progress" value="0">
+        <div class="progress-container">
+          <span class="progress-bar"></span>
+        </div>
+      </progress>
+    </header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      
+        <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">On Different Perspectives of Measuring Data Utility</h1>
+    <p class="post-meta">July 31, 2023</p>
+    <p class="post-tags">
+      <a href="/blog/2023"> <i class="fas fa-calendar fa-sm"></i> 2023 </a>
+        ·  
+        <a href="/blog/tag/dataset-pruning">
+          <i class="fas fa-hashtag fa-sm"></i> dataset-pruning</a>  
+          
+        ·  
+        <a href="/blog/category/sample-posts">
+          <i class="fas fa-tag fa-sm"></i> sample-posts</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <h2 id="overview">Overview</h2>
+
+<p>Modern Deep Neural Networks are trained on a massive amount of data. Numerous works have proposed methods to estimate the contribution of each single datapoint. There are various ways to do this: to begin with, we can use hardcoded heuristics. For example, they use length and word frequency to determine whether a particular sentence is hard for a language model to learn. This method might seem hacky, but even the latest research on machine translation/language generation designs hardcoded heuristics based on the relative position of the token [<a href="https://arxiv.org/abs/2103.11088" rel="external nofollow noopener" target="_blank">Liang et al., 2021</a>, <a href="https://arxiv.org/abs/2211.11297" rel="external nofollow noopener" target="_blank">Jia et al., 2023</a>]. These methods usually induce numerous extra hyper-parameters and thus require careful tuning for performance. More importantly, relying on a task-specific heuristic does not generalize well to new tasks without domain-specific knowledge. I will not review the details of these methods in the blog post and instead focus on ways that show promises of generalization beyond the tasks the authors experimented on.</p>
+
+<p>There are also lines of work that are more theoretically grounded by approximating the influence on training and validation loss of each datapoint. These lines differ in their way of doing this approximation. In this blog post, I will go over each of these methods and discuss each method’s strengths and limitations. This blog post also covers my thoughts on connecting data utility evaluation with curriculum learning and studies on the loss landscape.</p>
+
+<p>At last, I will cover some of my latest thoughts for future directions. Research on data quality estimation traces back to the mid-90s but is still rapidly evolving. It would be crucial to design more efficient methods when the model and data sizes are scaling up exponentially.</p>
+
+<h2 id="dataset-pruning">Dataset Pruning:</h2>
+
+<p>A canonical way of estimating the contribution of individual parameters is by how much the training loss is affected when the parameter is removed. Similarly, we can also measure how the change of the loss is affected when a single datapoint is removed in a single batch.</p>
+
+<p>[<a href="https://arxiv.org/abs/2107.07075" rel="external nofollow noopener" target="_blank">Paul et al., 2021</a>] approaches this problem by analyzing the change in loss when the update steps are continuous: The time derivative of the loss for a given training example is given by:</p>
+
+\[\Delta_t((x, y), S) = -\frac{\textrm{d} \ell(f_t(x), y)}{\textrm{d} t} = \frac{\textrm{d} \ell(f_t(x), y)}{\textrm{d} w_t} \cdot\frac{\textrm{d} w_t}{d t} = \textrm{grad}\cdot\frac{\textrm{d}w_t}{\textrm{d}t}\]
+
+<p>Where \(S\) is the mini-batch in SGD or the entire training set in GD.</p>
+
+<p>Intuitively, the metric \(\Delta_t ((x, y), S)\) measures the change in training loss when using an infinitesimal learning rate - the gradient flow. Now we bound the difference in loss of any example with an infinitesimal learning rate.</p>
+
+<p><strong>Theorem</strong>: Up to a constant \(c\), the change in loss for another example in the same batch under an infinitesimal learning rate setting when a specific datapoint in that batch is pruned is bouned by the gradient norm on that pruned example:</p>
+
+<p>\(\|\Delta_t((x,y),S) - \Delta_t((x, y), S_{\neg j})\| \leq c\|g_t(x_j, y_j)\|\) </p>
+
+<p>Please refer to the paper for detailed proof.</p>
+
+<p>However, it is hard to calculate the gradient for a single example at training iteration \(t\): \(g_t(x_j, y_j)\) since we batch multiple training examples together and aggregate the gradients. If we assume that the gradients of each logit \(\nabla w_t f_t^{(k)}(x)\) are orthogonal and have similar sizes, we can approximate the per example gradients as:</p>
+
+\[\|g_t(x_i, y_i)\|_2 = \|\nabla_{f^{(k)}} \ell(f_t(x), y)^\top \nabla_{w_t}f_t^{(k)}(x)\|_2\approx\|p(x)-y\|_2\]
+
+<p>The R.H.S is the $\ell_2$ norm of the error vector. The paper calibrates the error l2 norm (EL2N) with multiple training runs at a specific training iteration. The author finds out that the model can identify hard training examples/noise in data with a very high EL2N score, and pruning 40% to 50% percent of data in CIFAR10 and 20% to 30% of data in CIFAR100 matches the performance of full training.</p>
+
+<p>EL2N scores (l2 norm of prediction vector - groundtruth one-hot vector) are highly effective in identifying data that are either too hard or contain noise (see the following picture from the paper for easy and hard examples in image classification).</p>
+
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/high_el2n_pict-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/high_el2n_pict-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/high_el2n_pict-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/high_el2n_pict.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+<p>However, one intriguing question is how we can know that the high error norm for a datapoint correctly identifies a certain datapoint as noise instead of the model being incompetent. Choosing the EL2N score of arbitrary checkpoints and testing out performance does not scale well to large datasets. Another question I had was how this method generalizes to tasks other than image classification. I tested out this dataset pruning method on a multilingual machine translation task by selecting four language pairs (en-{de, es, fr, it}) from the opus-100 dataset:</p>
+
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/el2n_random_plots_averaged-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/el2n_random_plots_averaged-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/el2n_random_plots_averaged-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/el2n_random_plots_averaged.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+<p>Although I only did one training run for each pruned sparsity, the difference between pruning high EL2N and random pruning is high, especially when more data is pruned, showcasing that this method generalizes well under a machine translation setup. But what is more interesting is that for machine translation, the maximal percentage of data you can prune without harming the performance is around 20% as opposed to the redundancy in image classification - which is counterintuitive because machine translation data, from my perspective, should be noisier than image classification data and thus a higher percentage of data can be pruned.</p>
+
+<p>I want to wrap this section of this paper up by re-iterating the limitation of this method: calibration of the EL2N score requires several training runs. For classification tasks with only a few labels, this is not a problem as a single or a few runs might give you a reasonable estimate. However, in language modeling, where the label size is your dictionary’s size, the variance of EL2N is high. It thus requires trying out different iterations and multiple training runs for a more accurate estimate.</p>
+
+<p><a href="https://arxiv.org/abs/2206.14486" rel="external nofollow noopener" target="_blank">Sorscher et al., 2022</a> present a follow-up work by proposing to cluster the data using their representations in a pre-trained model (in the paper, they used the SWaV model on ImageNet) and find examples that are super far away from the clusters to detect data to prune. Directly applying this to language modeling or machine translation raises the problem of having a large number of clusters. In ImageNet, there is only 1000 classes resulting in 1000 cluster center, whereas in language modeling, the vocabulary size is at least ten times large.</p>
+
+<p>However, suppose dataset pruning can beat scaling laws, and we can train much better LMs without exponentially increasing the amount of data by applying unsupervised clustering methods on text. In that case, this research direction should be promising. The question remains how can we automatically filter high-quality data from the enormous amount of data we have and validate that the data we have is high quality without full training runs of large language models - is training a tiny LM on high-quality data sufficient for validating the quality of data?</p>
+
+<h2 id="influence-functions">Influence Functions</h2>
+
+<p>Another line of work [<a href="[Understanding%20Black-box%20Predictions%20via%20Influence%20Functions](https://proceedings.mlr.press/v70/koh17a.html)">Koh and Liang, 2017</a>, <a href="https://arxiv.org/abs/2205.09329" rel="external nofollow noopener" target="_blank">Yang et al., 2023</a>] also estimates data utility by how much of a difference it makes when that specific datapoint is removed. However, instead of measuring the difference in <strong>loss</strong> as in the aforementioned works, they measure the difference in the <strong>parameters</strong>. Formally, if \(\hat{\theta}\) and \(\hat{\theta}_{\neg z}\) are the empirical risk minimizer of the training set with and without a certain datapoint \(z\), respectively, we measure the difference to represent the utility of the datapoint \(z\):</p>
+
+\[\mathcal{I}_\theta(z) = |\hat{\theta} - \hat{\theta}_{\neg z}|\]
+
+<p>Statistical theory <a href="https://conservancy.umn.edu/handle/11299/37076" rel="external nofollow noopener" target="_blank">[Cook and Weisberg, 1982]</a> gives us an approximation of how much change in parameters if a certain example is upweighted by a factor of \(\epsilon\) .</p>
+
+\[\mathcal{I}_{\textrm{upweight}}(z) = \frac{\textrm{d} \hat{\theta}}{\textrm{d} \epsilon}|_{\epsilon=0} = -\mathcal{H}_{\hat{\theta}}^{-1}\nabla_\theta\ell( z, \theta ) \]
+
+<p>Setting the upweighting factor to  $-\frac{1}{n}$ is the same as removing the data, therefore we approximate the utility of the datapoint by</p>
+
+\[\mathcal{I}_\ell(z) = \left|\hat{\theta} - \hat{\theta}_{\neg z}\right| = \left|-\frac{1}{n}\mathcal{I}_{\textrm{upweight}}(z)\right|\]
+
+<p>Ultimately we care about the test performance. Applying the chain rule, we can also approximate the change of the <strong>test</strong> loss when a particular training example \(z\) is removed:</p>
+
+\[\mathcal{I}_{\textrm{upweight}}(z, z_\textrm{test}) = \frac{\textrm{d} \ell(z_\textrm{test}, \hat{\theta})}{\textrm{d} \hat{\theta}}\cdot \frac{\textrm{d} \hat{\theta}}{\textrm{d} \epsilon} =-\nabla_{\theta}\ell(z_\textrm{test}, \hat{\theta})^\top\mathcal{H}_{\hat{\theta}}^{-1}\nabla_{\theta}\ell(z, \hat{\theta})\]
+
+<p>Here we are able to see that the difference in test loss is also upper bounded by the norm of the gradient on that particular training example scaled by constant factors. Moreover, it also shows whether pruning a particular example would improve or degrade test performance depends on <strong>the dot product</strong> <strong>between the training and test gradients</strong> - this is intuitive. Still, in practice, we cannot access the test set. Numerous works have used the dot product between the training gradient and development gradient as a proxy for data utility [<a href="https://arxiv.org/pdf/1911.10088.pdf" rel="external nofollow noopener" target="_blank">Wang et al., 2020a</a>, <a href="https://arxiv.org/pdf/2004.06748.pdf" rel="external nofollow noopener" target="_blank">Wang et al., 2020b</a>, <a href="https://arxiv.org/pdf/2109.04778.pdf" rel="external nofollow noopener" target="_blank">Yang et al., 2021</a>]. Therefore, the influence function here takes three things into account for estimating data utility:</p>
+
+<ul>
+  <li>The similarity between training and test gradients \(\nabla_\theta\ell(z_\textrm{test}, \theta)^\top \nabla_\theta\ell(z, \hat{\theta})\);</li>
+  <li>The local curvature of the loss function at the current training step \(\mathcal{H}^{-1}_{\hat{\theta}}\);</li>
+  <li>The magnitude of training gradient: \(\|\nabla_\theta\ell(z, \hat{\theta})\|\).</li>
+</ul>
+
+<p>In theory, this should be a more accurate estimate, but this method is impractical as it requires us to compute the per-sample gradients, which is already expensive. Not to mention calculating the dot product and the Hessian.</p>
+
+<p>Recent work reframes data selection as two discrete optimization problems [<a href="https://arxiv.org/abs/2205.09329" rel="external nofollow noopener" target="_blank">Yang et al., 2023</a>]:</p>
+
+<ul>
+  <li>Given a constraint on the change in the norm of parameters, find the largest subset of data that satisfies this constraint.</li>
+  <li>Given the budget on the fraction of data to prune, find the subset of data that results in the minimal change in parameters.</li>
+</ul>
+
+<p>The essence of this method is that they consider the “group effect” when pruning data. One datapoint might have large gradient norms that seem unprunable, but when combined with another data, they have a small norm and can be pruned together. In the paper, the author solves the optimization problem with simulated annealing [<a href="https://link.springer.com/book/10.1007/978-94-015-7744-1" rel="external nofollow noopener" target="_blank">Van Laarhoven and Arts, 1987</a>]. A critical engineering trick to speed up estimation is only computing the influence on the last linear layer.</p>
+
+<h2 id="connections-with-curriculum-learning">Connections with Curriculum Learning</h2>
+
+<p>So far, we have assumed that the utility of a single datapoint is <strong>static</strong> and <strong>model agnostic</strong>. These methods pre-compute the utility of data, filter out the noisy ones, and run another training run on the pruned dataset. But in fact, the estimations (EL2N or Influence Functions) take the models’ current states into account. A naive connection would apply this to curriculum learning, where data are assigned a score and presented to the model adhering to a given schedule.</p>
+
+<p>The motivation is that humans learn knowledge at different paces and models as well [<a href="https://arxiv.org/abs/2012.03107" rel="external nofollow noopener" target="_blank">Wu et al., 2021</a>], so we should present the easier data first, then more complex data, or general domain data first, then in-domain data. Existing research of curriculum learning for machine translation/language modeling ranks the training data with pre-defined heuristics. e.g., the perplexity of the text when evaluated by a pretrained language model [<a href="[Intelligent%20Selection%20of%20Language%20Model%20Training%20Data%20-%20ACL%20Anthology](https://aclanthology.org/P10-2041/)">Moore and Lewis, 2010</a>], sentence length and averaged word frequency [<a href="[Competence-based%20Curriculum%20Learning%20for%20Neural%20Machine%20Translation%20-%20ACL%20Anthology](https://aclanthology.org/N19-1119/)">Platanios et al., 2019</a>], similarity to the in-domain data [<a href="[Curriculum%20Learning%20for%20Domain%20Adaptation%20in%20Neural%20Machine%20Translation%20-%20ACL%20Anthology](https://aclanthology.org/N19-1189/)">Zhang et al., 2019</a>]. On a token level, this can be the position of the token [<a href="[Token-wise%20Curriculum%20Learning%20for%20Neural%20Machine%20Translation%20-%20ACL%20Anthology](https://aclanthology.org/2021.findings-emnlp.310/)">Liang et al., 2022</a>, <a href="[In-sample%20Curriculum%20Learning%20by%20Sequence%20Completion%20for%20Natural%20Language%20Generation%20-%20ACL%20Anthology](https://aclanthology.org/2023.acl-long.666/)">Jia et al., 2023</a>].</p>
+
+<p>However, the schedule of how we should present the data stream with different scores is not well studied. The above work usually handcrafts several schedules and tests them out empirically, inducing many additional hyper-parameters to test out. Suppose we apply the pruning metrics, considering the model’s current state. In that case, we can design automated curriculums without pre-defined metrics or requiring a handcrafted schedule.</p>
+
+<h2 id="future-directions">Future Directions</h2>
+
+<p>Moving forward, I think there are some promising research directions that are worth exploring:</p>
+
+<ul>
+  <li>Dataset Pruning on large scale text corpora: So far, all of these dataset pruning papers experiment on the task of image classification data, but does the finding still hold when evaluated on magnitudes that are magnitudes larger? How can we adapt these methods to language modeling/machine translation if not?</li>
+  <li>The theory behind curriculum learning: Why does presenting the data in a given order speeds up training or have better generalizability? Does it guide the model to a smoother area in the loss landscape?</li>
+  <li>Does the distribution of data quality estimated by the model also give an estimate of the model itself?</li>
+</ul>
+
+    </div>
+  </article>
+</div>
+
+      
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2023 Tianjian  Li. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>.
+
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script>
+    
+  <!-- Medium Zoom JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/zoom.js"></script>
+
+  <!-- Bootstrap Table -->
+  <script defer src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>
+
+  <!-- Load Common JS -->
+  <script src="/assets/js/no_defer.js"></script>
+  <script defer src="/assets/js/common.js"></script>
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
+
+    
+  <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script async src="https://badge.dimensions.ai/badge.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    
+    
+
+<!-- Scrolling Progress Bar -->
+<script type="text/javascript">
+  /*
+   * This JavaScript code has been adapted from the article 
+   * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar, 
+   * published on the website https://css-tricks.com on the 7th of May, 2014.
+   * Couple of changes were made to the original code to make it compatible 
+   * with the `al-foio` theme.
+   */
+  const progressBar = $("#progress");
+  /*
+   * We set up the bar after all elements are done loading.
+   * In some cases, if the images in the page are larger than the intended
+   * size they'll have on the page, they'll be resized via CSS to accomodate
+   * the desired size. This mistake, however, breaks the computations as the
+   * scroll size is computed as soon as the elements finish loading.
+   * To account for this, a minimal delay was introduced before computing the
+   * values.
+   */
+  window.onload = function () {
+    setTimeout(progressBarSetup, 50);
+  };
+  /*
+   * We set up the bar according to the browser.
+   * If the browser supports the progress element we use that.
+   * Otherwise, we resize the bar thru CSS styling
+   */
+  function progressBarSetup() {
+    if ("max" in document.createElement("progress")) {
+      initializeProgressElement();
+      $(document).on("scroll", function() {
+        progressBar.attr({ value: getCurrentScrollPosition() });
+      });
+      $(window).on("resize", initializeProgressElement);
+    } else {
+      resizeProgressBar();
+      $(document).on("scroll", resizeProgressBar);
+      $(window).on("resize", resizeProgressBar);
+    }
+  }
+  /*
+   * The vertical scroll position is the same as the number of pixels that
+   * are hidden from view above the scrollable area. Thus, a value > 0 is
+   * how much the user has scrolled from the top
+   */
+  function getCurrentScrollPosition() {
+    return $(window).scrollTop();
+  }
+
+  function initializeProgressElement() {
+    let navbarHeight = $("#navbar").outerHeight(true);
+    $("body").css({ "padding-top": navbarHeight });
+    $("progress-container").css({ "padding-top": navbarHeight });
+    progressBar.css({ top: navbarHeight });
+    progressBar.attr({
+      max: getDistanceToScroll(),
+      value: getCurrentScrollPosition(),
+    });
+  }
+  /*
+   * The offset between the html document height and the browser viewport
+   * height will be greater than zero if vertical scroll is possible.
+   * This is the distance the user can scroll
+   */
+  function getDistanceToScroll() {
+    return $(document).height() - $(window).height();
+  }
+
+  function resizeProgressBar() {
+    progressBar.css({ width: getWidthPercentage() + "%" });
+  }
+  // The scroll ratio equals the percentage to resize the bar
+  function getWidthPercentage() {
+    return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+  }
+</script>
+
+  </body>
+</html>
