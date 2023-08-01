@@ -20,7 +20,7 @@ At last, I will cover some of my latest thoughts for future directions. Research
 
 A canonical way of estimating the contribution of individual parameters is by how much the training loss is affected when the parameter is removed. Similarly, we can also measure how the change of the loss is affected when a single datapoint is removed in a single batch.
 
-[[Paul et al., 2021](https://arxiv.org/abs/2107.07075)] approaches this problem by analyzing the change in loss when the update steps are continuous: The time derivative of the loss for a given training example is given by:
+[Paul et al., 2021](https://arxiv.org/abs/2107.07075) approaches this problem by analyzing the change in loss when the update steps are continuous: The time derivative of the loss for a given training example is given by:
 
 $$\Delta_t((x, y), S) = -\frac{\textrm{d} \ell(f_t(x), y)}{\textrm{d} t} = \frac{\textrm{d} \ell(f_t(x), y)}{\textrm{d} w_t} \cdot\frac{\textrm{d} w_t}{d t} = \textrm{grad}\cdot\frac{\textrm{d}w_t}{\textrm{d}t}$$
 
