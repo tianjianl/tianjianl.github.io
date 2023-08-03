@@ -220,7 +220,7 @@
 
 \[\mathcal{I}_\theta(z) = |\hat{\theta} - \hat{\theta}_{\neg z}|\]
 
-<p>Statistical theory <a href="https://conservancy.umn.edu/handle/11299/37076" rel="external nofollow noopener" target="_blank">[Cook and Weisberg, 1982]</a> gives us an approximation of change in parameters if a certain example is upweighted by a factor of \(\epsilon\) .</p>
+<p>Statistical theory <a href="https://conservancy.umn.edu/handle/11299/37076" rel="external nofollow noopener" target="_blank">[Cook and Weisberg, 1982]</a> gives us an approximation of change in parameters if a certain example is upweighted by a factor of \(\epsilon\) . This is equivalent to training on this augmented loss: \(\frac{1}{n} \sum_{i=1}^n \mathcal{L}(z_i, \theta) + \epsilon \mathcal{L}(z, \theta)\).</p>
 
 \[\mathcal{I}_{\textrm{upweight}}(z) = \frac{\textrm{d} \hat{\theta}}{\textrm{d} \epsilon}|_{\epsilon=0} = -\mathcal{H}_{\hat{\theta}}^{-1}\nabla_\theta\ell( z, \theta ) \]
 
