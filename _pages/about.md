@@ -19,7 +19,7 @@ My name is Tianjian Li. I have received my B.A. in Mathematics and Computer Scie
 
 My research interests lie in the field of deep learning and natural language processing, with a particular focus on the intersection of **multilinguality** and **natural language generation**, often applied in the context of machine translation. I aim to address the following questions in my research:
 
-- How can we effectively measure the utility of parameters and data within the realm of machine translation, enabling us to optimize the use of our data? 
+- How can we effectively measure the utility of [parameters](https://tianjianl.github.io/assets/Weighted_Freezing_preprint.pdf) and data within the realm of multilingual generation, enabling us to optimize the use of our compute? 
 - How can we construct practical multilingual NLP systems that perform well, even when confronted with [limited training data](https://arxiv.org/abs/2305.17325) and computational resources? 
 
 I prefer solutions that possess simplicity, exhibit strong generalizability, and grounded in theory.

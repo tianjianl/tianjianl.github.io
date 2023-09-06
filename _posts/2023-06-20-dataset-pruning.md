@@ -58,7 +58,7 @@ However, suppose dataset pruning can beat scaling laws: we can train much better
 
 ## Influence Functions
 
-Another line of work [[Koh and Liang, 2017](https://proceedings.mlr.press/v70/koh17a.html), [Yang et al., 2023](https://arxiv.org/abs/2205.09329)] also estimates data utility by how much of a difference it makes when that specific datapoint is removed. However, instead of measuring the difference in **loss** as in the aforementioned works, they measure the difference in the **parameters**. Formally, if $$\hat{\theta}$$ and $$\hat{\theta}_{\neg z}$$ are the empirical risk minimizers of the training set with and without a certain datapoint $$z$$, respectively, we measure the difference to represent the utility of the datapoint $$z$$:
+Another line of work [[Koh and Liang, 2017](https://proceedings.mlr.press/v70/koh17a.html), [Pruthi et al., 2020](https://proceedings.neurips.cc/paper/2020/hash/e6385d39ec9394f2f3a354d9d2b88eec-Abstract.html), [Yang et al., 2023](https://arxiv.org/abs/2205.09329)] also estimates data utility by how much of a difference it makes when that specific datapoint is removed. However, instead of measuring the difference in **loss** as in the aforementioned works, they measure the difference in the **parameters**. Formally, if $$\hat{\theta}$$ and $$\hat{\theta}_{\neg z}$$ are the empirical risk minimizers of the training set with and without a certain datapoint $$z$$, respectively, we measure the difference to represent the utility of the datapoint $$z$$:
 
 $$\mathcal{I}_\theta(z) = |\hat{\theta} - \hat{\theta}_{\neg z}|$$
 
@@ -81,6 +81,7 @@ Here we are able to see that the difference in test loss is also upper bounded b
 - The magnitude of training gradient: $$\|\nabla_\theta\ell(z, \hat{\theta})\|$$.
 
 In theory, this should be a more accurate estimate, but this method is impractical as it requires us to compute the per-sample gradients, which is already expensive. Not to mention calculating the dot product and the Hessian during every training iteration.
+
 
 Recent work reframes data selection as two discrete optimization problems [[Yang et al., 2023](https://arxiv.org/abs/2205.09329)]:
 
