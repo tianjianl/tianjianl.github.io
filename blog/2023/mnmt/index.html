@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Manipulating Gradients to Balance Multilingual Machine Translation Models | Tianjian  Li</title>
+    <meta name="author" content="Tianjian  Li">
+    <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+">
+    <meta name="keywords" content="Natural Language Processing, Machine Translation, Multilinguality">
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+
+    <!-- Bootstrap Table -->
+    <link defer rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
+
+    
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://tianjianl.github.io/blog/2023/mnmt/">
+
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark">
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">Tianjian </span>Li</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">about</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">blog<span class="sr-only">(current)</span></a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/publications/">publications</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/assets/pdf/CV.pdf">cv</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <li class="toggle-container">
+                <button id="light-toggle" title="Change theme">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Scrolling Progress Bar -->
+      <progress id="progress" value="0">
+        <div class="progress-container">
+          <span class="progress-bar"></span>
+        </div>
+      </progress>
+    </header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      
+        <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Manipulating Gradients to Balance Multilingual Machine Translation Models</h1>
+    <p class="post-meta">November 8, 2023</p>
+    <p class="post-tags">
+      <a href="/blog/2023"> <i class="fas fa-calendar fa-sm"></i> 2023 </a>
+        ·  
+        <a href="/blog/tag/machine-translation">
+          <i class="fas fa-hashtag fa-sm"></i> machine-translation</a>  
+          
+        ·  
+        <a href="/blog/category/sample-posts">
+          <i class="fas fa-tag fa-sm"></i> sample-posts</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <h2 id="overview">Overview</h2>
+
+<p>Finding out the reasons and solutions for negative interference in Multilingual Neural Machine Translation [<a href="https://arxiv.org/abs/1611.04558" rel="external nofollow noopener" target="_blank">Johnson et al., 2016</a>; <a href="https://aclanthology.org/N19-1388" rel="external nofollow noopener" target="_blank">Aharoni et al., 2019</a>] has been an active research area for the past 5-7 years. Yet, while previous studies [<a href="https://arxiv.org/abs/2010.05874" rel="external nofollow noopener" target="_blank">Wang et al., 2020</a>] find that negative interference mainly occurs between different language families, recent studies [<a href="https://arxiv.org/abs/2212.07530" rel="external nofollow noopener" target="_blank">Shaham et al., 2023</a>] have demonstrated that negative inference does not happen between languages of different families. The interference emerges because of the mismatch in the amount of data for different translation directions. Real-world translation data suffers from a heavy mismatch of data in different directions, ranging from less than 100K to over 100M [<a href="https://arxiv.org/abs/2207.04672" rel="external nofollow noopener" target="_blank">NLLB Team, 2022</a>], so it is crucial to find balancing methods that are both scalable and robust.</p>
+
+<p>This blog post aims to give an overview of the two approaches for handling imbalances in multilingual neural machine translation: <strong>Scalarization</strong> and <strong>Gradient projection</strong>. Both methods have pros and cons, and there still needs to be a consensus on which method performs the best. This blog post will cover some of the most up-to-date methods for handling data size mismatches and interference.</p>
+
+<p><strong>Disclaimer:</strong> The papers introduced in this blog post are only representative works rather than a comprehensive survey to give an overview of the different methods to handle data imbalance in translation directions.</p>
+
+<h2 id="background">Background</h2>
+
+<h4 id="multilingual-neural-machine-translation">Multilingual Neural Machine Translation</h4>
+
+<p>We start by describing some basics in multilingual neural machine translation: we are interested in mapping a source sequence \(\textbf{x}_s = \{x_1, x_2, ..., x_n\}\) in language \(s\) to a target sequence \(\textbf{y}_t = \{y_1, y_2, ..., y_m\}\) in language \(t\). We train an autoregressive model parameterized by $\theta$ that predicts each target token conditioning on the entire source sentence and the target tokens before it:</p>
+
+\[\mathcal{L}_{s,t}(\theta) = \sum_{i=1}^m \log p_\theta(y_i \mid \mathbf{y}_{&lt;i}, \mathbf{x}).\]
+
+<p>In multilingual neural machine translation, multiple source-target pairs are concatenated to form a large dataset. Given parallel sentences in \(N\) languages pairs \((s_1, t_1), (s_2, t_2),... (s_N, t_N)\), a naive multilingual machine translation model aims to minimize an unweighted sum of the losses of individual translation directions:</p>
+
+\[\mathcal{L}_\text{MMT}(\theta) = \sum_{i=1}^N \mathcal{L}_{s_i, t_i}(\theta)\]
+
+<p>Here, the parameters for each translation direction are shared, which is much more compute-efficient than training individual models for each direction. Different directions might benefit from each other, resulting in positive transfer.</p>
+
+<h4 id="pareto-front">Pareto Front</h4>
+
+<p>Multilingual Translation can be seen as a multi-task learning (or multi-objective optimization) problem [<a href="https://aclanthology.org/N19-1388/" rel="external nofollow noopener" target="_blank">Ahroni et al., 2019</a>], where each translation direction is an individual task. We are interested in finding the optimal solutions in that we cannot improve the performance of an individual task without sacrificing the performance of other tasks. Such solutions are called <strong>Pareto optimal solutions</strong> [<a href="https://web.stanford.edu/~boyd/cvxbook/" rel="external nofollow noopener" target="_blank">Boyd and Vandenberghe, 2004</a>]. The set of all Pareto optimal solutions forms the <strong>Pareto Front</strong> of a given multi-objective optimization problem. See Figure 1 for an illustration of the Pareto front (figure pasted from <a href="https://arxiv.org/abs/2302.09650" rel="external nofollow noopener" target="_blank">Fernandes et al., 2023</a>).</p>
+
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/Screenshot%202023-11-08%20at%2011.43.59%E2%80%AFPM-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/Screenshot%202023-11-08%20at%2011.43.59%E2%80%AFPM-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/Screenshot%202023-11-08%20at%2011.43.59%E2%80%AFPM-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/Screenshot%202023-11-08%20at%2011.43.59%E2%80%AFPM.png" class="img-fluid rounded z-depth-1" width="391" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+<h2 id="scalarization">Scalarization</h2>
+
+<p>The heavy mismatch in data sizes causes the naive unweighted average of individual losses to amplify the performance of high-resource languages (HRLs) and decrease the performance of low-resource languages (LRLs). In practice, we sample a batch of input and output sentences. Since data of HRLs can be more than 10x of data of LRLs, we are far more likely to sample from HRLs, resulting in the optimization process heavily favoring optimizing towards better performance on HRLs.</p>
+
+<p>To mitigate this, instead of using proportional sampling, we can use temperature sampling [<a href="https://arxiv.org/abs/1907.05019" rel="external nofollow noopener" target="_blank">Arivazhagan et al., 2019</a>]. The probability of sampling from each direction is given by:</p>
+
+\[p_{(s_i, t_i)} = \frac{D(s_i, t_i)^\frac{1}{\tau}}{\sum_{j=1}^N D(s_j, t_j)^\frac{1}{\tau}}\]
+
+<p>Where \(D(s_i, t_i)\) is the datasize of translation direction \(s_i \rightarrow t_i\) , and \(\tau\) is the sampling temperature. When \(\tau = 1\), our sampling method is equivalent to naive proportional sampling. As \(\tau\)  gets larger, we are decreasing the weights on HRLs and increasing the weights on LRLs. As \(\tau \rightarrow +\infty\), the sampling strategy becomes a uniform distribution over all language pairs.</p>
+
+<p>A common understanding in the machine translation literature is that tuning the temperature \(\tau\) is equivalent to tuning the weights for each translation direction in a weighted sum of individual losses, which we refer to as <strong>scalarization</strong>.</p>
+
+\[\mathcal{L}_\text{MMT}(\theta) = \sum_{i=1}^N w_i \mathcal{L}_{s_i, t_i}(\theta)\]
+
+<p>Although the equivalency of tuning the temperature $\tau$ and tuning the weights $w_i$ have not been thoroughly established, in this blog post, I will use <strong>sampling ratio</strong> and <strong>task weights</strong> interchangeably and introduce some of the latest advances in how to find fantastic weights that achieves good performance.</p>
+
+<h4 id="static-weights">Static Weights</h4>
+
+<p><a href="https://arxiv.org/abs/2302.09650" rel="external nofollow noopener" target="_blank">Fernandes et al., 2023</a> show we can find the Pareto front for multilingual translation by varying the sampling ratio. However, their work assumes that we have an even amount of data for each translation direction, which is often untrue in real-world settings. A follow-up work [<a href="https://arxiv.org/abs/2304.03216" rel="external nofollow noopener" target="_blank">Chen et al., 2023</a>] shows that when there is a data size mismatch, the Pareto front collapses: see the following figure from the paper for a comparison between the Pareto curve when data is balanced VS data is imbalanced.</p>
+
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/Screenshot%202023-11-08%20at%204.45.32%E2%80%AFPM-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/Screenshot%202023-11-08%20at%204.45.32%E2%80%AFPM-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/Screenshot%202023-11-08%20at%204.45.32%E2%80%AFPM-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/Screenshot%202023-11-08%20at%204.45.32%E2%80%AFPM.png" class="img-fluid rounded z-depth-1" width="602" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+<p><a href="https://arxiv.org/abs/2304.03216" rel="external nofollow noopener" target="_blank">Chen et al., 2023</a> presents a comprehensive study on how to tune the sampling temperature (or, equivalently, task weights) for each translation direction. Given a fixed sampling ratio $p$ and the number of training examples $D$ for a given direction, the cross-entropy loss can be expressed as:</p>
+
+\[\mathcal{L}(p, D) = (k\cdot p)^{-\alpha} + (D^\gamma + b) \cdot(q\cdot p)^{\beta}+M_{\infty}\]
+
+<p>The given parameters are the sampling ratio \(p\), the data size \(D\), and a constant bias term \(M_{\infty}\), and the rest of the parameters are to be estimated. To estimate these parameters, the authors conducted a series of experiments on WMT \(\text{English} \rightarrow \{\text{French, German}\}\) data and varied the amount of available data \(D\) and sampling ratio \(p\) to form a curve and estimate parameters that best fit this curve. Experiments show that their estimated scaling laws also generalize to other language pairs.</p>
+
+<p>So the question remains: how to find the best \(p\) for each direction? The author frames this as an optimization problem: given a fixed number of \(D\) and a pre-defined importance of each translation direction \(r\) for each task, the optimization problem is:</p>
+
+\[\mathbf{p} = \arg\min_p \mathcal{L}(p;r;d)\]
+
+\[\textrm{subject to}~\mathcal{L(\mathbf{p};r;d}) = \sum_{i}r_i\mathcal{L}(p_i, D_i)\]
+
+\[\mathbf{p}&gt;0\]
+
+\[\sum_{i} p_i =1,~~~\sum_{i} r_i =1\]
+
+<p>The standard way is to assume each translation direction has equal importance \(r_i = \frac{1}{N}\), but this is customizable if you want to emphasize some translation directions. Such a static weighting method for multilingual translation produces strong baselines over using a fixed temperature (e.g., \(\tau = 1, 5, 100\)) and fancy gradient projection techniques (which we will introduce later).</p>
+
+<h4 id="dynamic-weights">Dynamic Weights</h4>
+
+<p>But why do we need static weights for each direction? The mismatch in data sizes causes a mismatch in convergence rates, as <a href="https://arxiv.org/abs/2205.01620" rel="external nofollow noopener" target="_blank">Huang et al., 2022</a> points out, while LRLs have already converged, the HRLs have not yet converged, and continuing training on all tasks results in overfitting on the LRLs. This motivates methods that tackle the imbalanced problem with dynamic sampling temperature methods that consider that different directions converge at different rates.</p>
+
+<p>A naive way is to focus on one or a set of translation directions that converges the slowest during training: In statistical learning, Distributionally Robust Optimization methods [<a href="https://arxiv.org/abs/1909.02060" rel="external nofollow noopener" target="_blank">Oren et al., 2019</a>; <a href="https://openreview.net/forum?id=ryxGuJrFvS" rel="external nofollow noopener" target="_blank">Sagawa et al., 2020</a>; <a href="https://arxiv.org/abs/2109.04020" rel="external nofollow noopener" target="_blank">Zhou et al., 2021</a>], instead of minimizing the sum of all losses, tries to minimize the loss of the worst performing group, forming a min-max optimization problem:</p>
+
+\[\min_\theta \max_{s, t} \mathcal{L_{s ,t}(\theta)}\]
+
+<p>However, naively minimizing the worse-performing language pair ignores the fact that several translation directions might have similar data sizes and thus have similar bad performance, so instead of only focusing on the one worse-performing direction, both <a href="https://arxiv.org/abs/1909.02060" rel="external nofollow noopener" target="_blank">Oren et al., 2019</a> and <a href="https://arxiv.org/abs/2109.04020" rel="external nofollow noopener" target="_blank">Zhou et al., 2021</a> proposes to minimize the loss of a <strong>set</strong> of worse performing domains/languages.</p>
+
+<p>Specifically, <a href="https://arxiv.org/abs/1909.02060" rel="external nofollow noopener" target="_blank">Oren et al., 2019</a> minimize a fixed <strong>fraction</strong> of worse performing domains in general language modeling.</p>
+
+<p><a href="https://arxiv.org/abs/2109.04020" rel="external nofollow noopener" target="_blank">Zhou et al., 2021</a> minimizes the worst-case weight average loss of all language pairs, where the weights/sampling ratios are close to proportional sampling. More intuitively, the author first finds some adversarial weights that are close to proportional weights but yields the worst possible loss of all the weights that are close and aims to minimize this loss. Again, you can be creative in how to define closeness for two probability distributions, but in their work, they used the \(\chi\)-Divergence because it has some nice properties [<a href="https://arxiv.org/abs/1610.02581" rel="external nofollow noopener" target="_blank">Duchi and Namkoong, 2016</a>; <a href="https://arxiv.org/abs/1806.08010" rel="external nofollow noopener" target="_blank">Hashimoto et al., 2018</a>].</p>
+
+<p>Experiment results show that maximizing the worst-case loss can improve the performance of LRLs while minimally sacrificing the performance of HRLs, essentially pushing forward the Pareto frontier.</p>
+
+<p><a href="https://openreview.net/forum?id=Rv3vp-JDUSJ" rel="external nofollow noopener" target="_blank">Li and Gong, 2021</a> find weights for each direction that guide the optimization process towards a flatter minimum. The improvements are more significant compared to our previously introduced Distributionally Robust Optimization works, which highlight that the optimization process for multilingual translation should take the differences in convergence (or, in this case, curvature) into account.</p>
+
+<p>We can also make the weights <strong>learnable</strong>. Depending on how to measure how <strong>well</strong> is the training process going, we bias our sampling ratio towards training regimes that are <strong>well</strong>.</p>
+
+<p>For example, we can select a sampling ratio so that our training gradient is most similar to the development gradient [<a href="https://arxiv.org/abs/2004.06748" rel="external nofollow noopener" target="_blank">Wang et al., 2020</a>].</p>
+
+<p>We can also select a sampling ratio to minimize loss-related definitions of learning progress. [<a href="https://arxiv.org/abs/2109.04020" rel="external nofollow noopener" target="_blank">Kreutzer et al., 2021</a>].</p>
+
+<p><u>But, perhaps the simplest of all methods is more robust and generalizable</u>:</p>
+
+<p>Instead of searching for these fantastic weights, why don’t we train on HRLs and then train on a mixture of HRLs and LRLs? Well, it turns out this simple method works surprisingly well:</p>
+
+<p><a href="https://openreview.net/forum?id=7RMGI4slcb" rel="external nofollow noopener" target="_blank">Choi et al., 2023</a> proposes to first train on HRLs, then “fine-tune” on a mixture of HRLs and LRLs, which is equivalent to tuning the temperature but in a more coarse-grained way. Instead of using the training signals (gradient, activations), this work manually divides the training into two stages - training on HRLs first and a mix of high and low resource languages second. This simple trick solves the mismatch in convergence that causes overfitting on the LRLs.</p>
+
+<h2 id="gradient-projection">Gradient Projection</h2>
+
+<p>It was not until recently [<a href="https://arxiv.org/abs/2209.11379" rel="external nofollow noopener" target="_blank">Xin et al., 2022</a>] that we realized we don’t need fancy techniques designed for multi-task learning to solve unbalanced training in multilingual translation. Simple scalarization often yields strong baselines that are tough to beat. However, there have been extensive studies on how to manipulate the gradients in general multi-task learning setups, and people have been trying them on multilingual machine translation.</p>
+
+<p>It is natural to assume that the gradient conflict between different tasks causes interference. Therefore, prior research has developed methods to either drop some of the conflicting gradients [<a href="https://arxiv.org/abs/2010.06808" rel="external nofollow noopener" target="_blank">Chen et al., 2020</a>], project one gradient to the orthogonal plane of another [<a href="https://arxiv.org/abs/2001.06782?context=cs.RO" rel="external nofollow noopener" target="_blank">Yu et al., 2020</a>; <a href="https://arxiv.org/abs/2109.04778" rel="external nofollow noopener" target="_blank">Yang et al., 2021</a>], or taking language similarity into account and project one gradient to a plane where the cosine similarity between gradients reflect language similarity [<a href="https://arxiv.org/abs/2010.05874" rel="external nofollow noopener" target="_blank">Wang et al., 2020</a>]. See the following figure for an illustration of these methods (red is task 1, and blue is task 2):</p>
+
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/Screenshot%202023-11-08%20at%2011.45.54%E2%80%AFPM-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/Screenshot%202023-11-08%20at%2011.45.54%E2%80%AFPM-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/Screenshot%202023-11-08%20at%2011.45.54%E2%80%AFPM-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/Screenshot%202023-11-08%20at%2011.45.54%E2%80%AFPM.png" class="img-fluid rounded z-depth-1" width="564" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+<p>As promising as these methods might seem, there has been compelling evidence recently that gradient deconfliction does not outperform simple static scalarization in the general multi-task learning setting [<a href="https://arxiv.org/abs/2209.11379" rel="external nofollow noopener" target="_blank">Xin et al., 2022</a>; <a href="https://arxiv.org/abs/2201.04122" rel="external nofollow noopener" target="_blank">Kurin et al., 2022</a>] and specifically for machine translation [<a href="https://arxiv.org/abs/2304.03216" rel="external nofollow noopener" target="_blank">Chen et al., 2023</a>].</p>
+
+<h2 id="discussion-and-future-work">Discussion and Future Work</h2>
+
+<p>As you can see, a lot of the papers introduced here are from the past one or two years, so the whole area of how to elegantly handle the data size mismatch in multilingual translation is still a trendy topic.</p>
+
+<p>We also see that <strong>scalarization</strong> and <strong>gradient projection</strong> modify two different parts of the gradient: scalarization mostly operates on the magnitude, and projection mainly operates on the direction (but magnitude is also involved).</p>
+
+<h4 id="future-directions">Future Directions</h4>
+
+<p>I will throw some of my thoughts on future directions here: all are challenging but exciting to pursue, and I envision myself working in these directions.</p>
+
+<ul>
+  <li>
+    <p>Find better ways to do dynamic scalarization without additional computational overhead - also needs to have strong improvements over Choi et al., 2023</p>
+  </li>
+  <li>
+    <p>Understand the optimization landscape of multilingual translation - and find which findings generalize to other deep multi-task settings (e.g., instruction tuning, LM pre-training) and also strong generalizability (e.g., zero-shot translation). Something Orhan Firat told me about is that many-to-one multilingual MT behaves more like general multi-task learning while yielding large improvements in the one-to-many setting is hard.</p>
+  </li>
+  <li>
+    <p>Scale up! Language Model pre-training needs to find weights for each domain (PaLM 2) - this work did a grid search on the weights, which is expensive. There are many open questions: should these weights be static or dynamic? what is the most important factor when findings these weights [<a href="https://arxiv.org/abs/2302.03169" rel="external nofollow noopener" target="_blank">Xie et al., 2023a</a>, <a href="https://arxiv.org/abs/2305.10429" rel="external nofollow noopener" target="_blank">Xie et al., 2023b</a>] - as simple as size? what about quality? How do we find scalable methods to measure pre-training data quality?</p>
+  </li>
+</ul>
+
+    </div>
+  </article>
+</div>
+
+      
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2023 Tianjian  Li. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>.
+
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script>
+    
+  <!-- Medium Zoom JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/zoom.js"></script>
+
+  <!-- Bootstrap Table -->
+  <script defer src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>
+
+  <!-- Load Common JS -->
+  <script src="/assets/js/no_defer.js"></script>
+  <script defer src="/assets/js/common.js"></script>
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
+
+    
+  <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script async src="https://badge.dimensions.ai/badge.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    
+    
+
+<!-- Scrolling Progress Bar -->
+<script type="text/javascript">
+  /*
+   * This JavaScript code has been adapted from the article 
+   * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar, 
+   * published on the website https://css-tricks.com on the 7th of May, 2014.
+   * Couple of changes were made to the original code to make it compatible 
+   * with the `al-foio` theme.
+   */
+  const progressBar = $("#progress");
+  /*
+   * We set up the bar after all elements are done loading.
+   * In some cases, if the images in the page are larger than the intended
+   * size they'll have on the page, they'll be resized via CSS to accomodate
+   * the desired size. This mistake, however, breaks the computations as the
+   * scroll size is computed as soon as the elements finish loading.
+   * To account for this, a minimal delay was introduced before computing the
+   * values.
+   */
+  window.onload = function () {
+    setTimeout(progressBarSetup, 50);
+  };
+  /*
+   * We set up the bar according to the browser.
+   * If the browser supports the progress element we use that.
+   * Otherwise, we resize the bar thru CSS styling
+   */
+  function progressBarSetup() {
+    if ("max" in document.createElement("progress")) {
+      initializeProgressElement();
+      $(document).on("scroll", function() {
+        progressBar.attr({ value: getCurrentScrollPosition() });
+      });
+      $(window).on("resize", initializeProgressElement);
+    } else {
+      resizeProgressBar();
+      $(document).on("scroll", resizeProgressBar);
+      $(window).on("resize", resizeProgressBar);
+    }
+  }
+  /*
+   * The vertical scroll position is the same as the number of pixels that
+   * are hidden from view above the scrollable area. Thus, a value > 0 is
+   * how much the user has scrolled from the top
+   */
+  function getCurrentScrollPosition() {
+    return $(window).scrollTop();
+  }
+
+  function initializeProgressElement() {
+    let navbarHeight = $("#navbar").outerHeight(true);
+    $("body").css({ "padding-top": navbarHeight });
+    $("progress-container").css({ "padding-top": navbarHeight });
+    progressBar.css({ top: navbarHeight });
+    progressBar.attr({
+      max: getDistanceToScroll(),
+      value: getCurrentScrollPosition(),
+    });
+  }
+  /*
+   * The offset between the html document height and the browser viewport
+   * height will be greater than zero if vertical scroll is possible.
+   * This is the distance the user can scroll
+   */
+  function getDistanceToScroll() {
+    return $(document).height() - $(window).height();
+  }
+
+  function resizeProgressBar() {
+    progressBar.css({ width: getWidthPercentage() + "%" });
+  }
+  // The scroll ratio equals the percentage to resize the bar
+  function getWidthPercentage() {
+    return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+  }
+</script>
+
+  </body>
+</html>
