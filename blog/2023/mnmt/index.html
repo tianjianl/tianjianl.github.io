@@ -174,7 +174,7 @@
     
 
     <!-- Fallback to the original file -->
-    <img src="/assets/img/Screenshot%202023-11-08%20at%2011.43.59%E2%80%AFPM.png" class="img-fluid rounded z-depth-1" width="391" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+    <img src="/assets/img/Screenshot%202023-11-08%20at%2011.43.59%E2%80%AFPM.png" class="img-fluid rounded z-depth-1 mx-auto d-block" width="391" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
   </picture>
 
@@ -210,7 +210,7 @@
     
 
     <!-- Fallback to the original file -->
-    <img src="/assets/img/Screenshot%202023-11-08%20at%204.45.32%E2%80%AFPM.png" class="img-fluid rounded z-depth-1" width="602" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+    <img src="/assets/img/Screenshot%202023-11-08%20at%204.45.32%E2%80%AFPM.png" class="img-fluid rounded z-depth-1 mx-auto d-block" width="602" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
   </picture>
 
@@ -268,25 +268,82 @@
 
 <p>It was not until recently [<a href="https://arxiv.org/abs/2209.11379" rel="external nofollow noopener" target="_blank">Xin et al., 2022</a>] that we realized we don’t need fancy techniques designed for multi-task learning to solve unbalanced training in multilingual translation. Simple scalarization often yields strong baselines that are tough to beat. However, there have been extensive studies on how to manipulate the gradients in general multi-task learning setups, and people have been trying them on multilingual machine translation.</p>
 
-<p>It is natural to assume that the gradient conflict between different tasks causes interference. Therefore, prior research has developed methods to either drop some of the conflicting gradients [<a href="https://arxiv.org/abs/2010.06808" rel="external nofollow noopener" target="_blank">Chen et al., 2020</a>], project one gradient to the orthogonal plane of another [<a href="https://arxiv.org/abs/2001.06782?context=cs.RO" rel="external nofollow noopener" target="_blank">Yu et al., 2020</a>; <a href="https://arxiv.org/abs/2109.04778" rel="external nofollow noopener" target="_blank">Yang et al., 2021</a>], or taking language similarity into account and project one gradient to a plane where the cosine similarity between gradients reflect language similarity [<a href="https://arxiv.org/abs/2010.05874" rel="external nofollow noopener" target="_blank">Wang et al., 2020</a>]. See the following figure for an illustration of these methods (red is task 1, and blue is task 2):</p>
+<p>It is natural to assume that the gradient conflict between different tasks causes interference. Therefore, prior research has developed methods to either drop some of the conflicting gradients [<a href="https://arxiv.org/abs/2010.06808" rel="external nofollow noopener" target="_blank">Chen et al., 2020</a>], project one gradient to the orthogonal plane of another [<a href="https://arxiv.org/abs/2001.06782" rel="external nofollow noopener" target="_blank">Yu et al., 2020</a>; <a href="https://arxiv.org/abs/2109.04778" rel="external nofollow noopener" target="_blank">Yang et al., 2021</a>], or taking language similarity into account and project one gradient to a plane where the cosine similarity between gradients reflect language similarity [<a href="https://arxiv.org/abs/2010.05874" rel="external nofollow noopener" target="_blank">Wang et al., 2020</a>]. See the following figure for an illustration of these methods:</p>
 
 <figure>
 
   <picture>
     
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/Screenshot%202023-11-08%20at%2011.45.54%E2%80%AFPM-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/Screenshot%202023-11-08%20at%2011.45.54%E2%80%AFPM-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/Screenshot%202023-11-08%20at%2011.45.54%E2%80%AFPM-1400.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/Grad-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/Grad-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/Grad-1400.webp"></source>
     
 
     <!-- Fallback to the original file -->
-    <img src="/assets/img/Screenshot%202023-11-08%20at%2011.45.54%E2%80%AFPM.png" class="img-fluid rounded z-depth-1" width="564" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+    <img src="/assets/img/Grad.png" class="img-fluid rounded z-depth-1 mx-auto d-block" width="564" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
   </picture>
 
 </figure>
 
-<p>As promising as these methods might seem, there has been compelling evidence recently that gradient deconfliction does not outperform simple static scalarization in the general multi-task learning setting [<a href="https://arxiv.org/abs/2209.11379" rel="external nofollow noopener" target="_blank">Xin et al., 2022</a>; <a href="https://arxiv.org/abs/2201.04122" rel="external nofollow noopener" target="_blank">Kurin et al., 2022</a>] and specifically for machine translation [<a href="https://arxiv.org/abs/2304.03216" rel="external nofollow noopener" target="_blank">Chen et al., 2023</a>].</p>
+<p>Not surprizingly, <a href="https://arxiv.org/abs/2010.05874" rel="external nofollow noopener" target="_blank">Wang et al., 2020</a> finds that the gradient similarity positively correlates with language familiies, i.e. languages from the same family are likely to have similar gradients. I reproduced some of their results in a English-to-many multilingual translation setting and found that the gradient similarity seems to have more to do with language order than script:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>En - X</th>
+      <th>Gradient Similarity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Similar script, Same order</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>French, Portugese</td>
+      <td>0.35</td>
+    </tr>
+    <tr>
+      <td><strong>Different script, Same order</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>French, Russian</td>
+      <td>0.13</td>
+    </tr>
+    <tr>
+      <td>French, Korean</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <td><strong>Similar script, Different order</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Chinese, Japanese</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>French, Turkish</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <td><strong>Different script, Different order</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>French, Japanese</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>Chinese, Korean</td>
+      <td>0.008</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As promising as gradient projection methods might seem, there has been compelling evidence recently that gradient deconfliction does not outperform simple static scalarization in the general multi-task learning setting [<a href="https://arxiv.org/abs/2209.11379" rel="external nofollow noopener" target="_blank">Xin et al., 2022</a>; <a href="https://arxiv.org/abs/2201.04122" rel="external nofollow noopener" target="_blank">Kurin et al., 2022</a>] and specifically for machine translation [<a href="https://arxiv.org/abs/2304.03216" rel="external nofollow noopener" target="_blank">Chen et al., 2023</a>].</p>
 
 <h2 id="discussion-and-future-work">Discussion and Future Work</h2>
 
@@ -306,7 +363,7 @@
     <p>Understand the optimization landscape of multilingual translation - and find which findings generalize to other deep multi-task settings (e.g., instruction tuning, LM pre-training) and also strong generalizability (e.g., zero-shot translation). Something Orhan Firat told me about is that many-to-one multilingual MT behaves more like general multi-task learning while yielding large improvements in the one-to-many setting is hard.</p>
   </li>
   <li>
-    <p>Scale up! Language Model pre-training needs to find weights for each domain. <a href="https://arxiv.org/abs/2305.10403" rel="external nofollow noopener" target="_blank">Anil et al., 2022</a> did a grid search on the weights, which is expensive. There are many open questions: should these weights be static or dynamic? what is the most important factor when findings these weights [<a href="https://arxiv.org/abs/2302.03169" rel="external nofollow noopener" target="_blank">Xie et al., 2023a</a>, <a href="https://arxiv.org/abs/2305.10429" rel="external nofollow noopener" target="_blank">Xie et al., 2023b</a>] - as simple as size? what about quality? How do we find scalable methods to measure pre-training data quality/diversity?</p>
+    <p>Scale up! Language Model pre-training needs to find weights for each domain. <a href="https://arxiv.org/abs/2305.10403" rel="external nofollow noopener" target="_blank">Anil et al., 2022</a> did a grid search on the weights, which is expensive. There are many open questions: should these weights be static or dynamic? what is the most important factor when finding these weights [<a href="https://arxiv.org/abs/2302.03169" rel="external nofollow noopener" target="_blank">Xie et al., 2023a</a>, <a href="https://arxiv.org/abs/2305.10429" rel="external nofollow noopener" target="_blank">Xie et al., 2023b</a>] - as simple as size? what about quality? How do we find scalable methods to measure pre-training data quality/diversity?</p>
   </li>
 </ul>
 
