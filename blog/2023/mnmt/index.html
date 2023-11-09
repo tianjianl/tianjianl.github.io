@@ -216,7 +216,7 @@
 
 </figure>
 
-<p><a href="https://arxiv.org/abs/2304.03216" rel="external nofollow noopener" target="_blank">Chen et al., 2023</a> presents a comprehensive study on how to tune the sampling temperature (or, equivalently, task weights) for each translation direction. Given a fixed sampling ratio $p$ and the number of training examples $D$ for a given direction, the cross-entropy loss can be expressed as:</p>
+<p><a href="https://arxiv.org/abs/2304.03216" rel="external nofollow noopener" target="_blank">Chen et al., 2023</a> presents a comprehensive study on how to tune the sampling temperature (or, equivalently, task weights) for each translation direction. Given a fixed sampling ratio \(p\) and the number of training examples \(D\) for a given direction, the cross-entropy loss can be expressed as:</p>
 
 \[\mathcal{L}(p, D) = (k\cdot p)^{-\alpha} + (D^\gamma + b) \cdot(q\cdot p)^{\beta}+M_{\infty}\]
 
@@ -291,21 +291,17 @@
 <table>
   <thead>
     <tr>
-      <th>En - X</th>
+      <th>Similar script, Same order</th>
       <th>Gradient Similarity</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><strong>Similar script, Same order</strong></td>
-      <td> </td>
-    </tr>
-    <tr>
       <td>French, Portugese</td>
       <td>0.35</td>
     </tr>
     <tr>
-      <td><strong>Different script, Same order</strong></td>
+      <td>Different script, same order</td>
       <td> </td>
     </tr>
     <tr>
@@ -317,7 +313,7 @@
       <td>0.22</td>
     </tr>
     <tr>
-      <td><strong>Similar script, Different order</strong></td>
+      <td>Similar script, different order</td>
       <td> </td>
     </tr>
     <tr>
@@ -329,7 +325,7 @@
       <td>0.12</td>
     </tr>
     <tr>
-      <td><strong>Different script, Different order</strong></td>
+      <td>Different script, different order</td>
       <td> </td>
     </tr>
     <tr>
