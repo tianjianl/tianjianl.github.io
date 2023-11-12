@@ -150,7 +150,7 @@
 
 <h4 id="multilingual-neural-machine-translation">Multilingual Neural Machine Translation</h4>
 
-<p>We start by describing some basics in multilingual neural machine translation: we are interested in mapping a source sequence \(\textbf{x}_s = \{x_1, x_2, ..., x_n\}\) in language \(s\) to a target sequence \(\textbf{y}_t = \{y_1, y_2, ..., y_m\}\) in language \(t\). We train an autoregressive model parameterized by $\theta$ that predicts each target token conditioning on the entire source sentence and the target tokens before it:</p>
+<p>We start by describing some basics in multilingual neural machine translation: we are interested in mapping a source sequence \(\textbf{x}_s = \{x_1, x_2, ..., x_n\}\) in language \(s\) to a target sequence \(\textbf{y}_t = \{y_1, y_2, ..., y_m\}\) in language \(t\). We train an autoregressive model parameterized by \(\theta\) that predicts each target token conditioning on the entire source sentence and the target tokens before it:</p>
 
 \[\mathcal{L}_{s,t}(\theta) = \sum_{i=1}^m \log p_\theta(y_i \mid \mathbf{y}_{&lt;i}, \mathbf{x}).\]
 
