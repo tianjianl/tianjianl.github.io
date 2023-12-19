@@ -22,9 +22,9 @@ My research interests lie in the field of deep learning and natural language pro
 - How can we effectively measure the utility of [parameters](https://tianjianl.github.io/assets/Weighted_Freezing_preprint.pdf) and [data](https://arxiv.org/abs/2310.00840) within the realm of multilingual language generation, enabling us to optimize the use of our compute? 
 - How can we construct practical multilingual NLP systems that perform well, even when confronted with [limited training data](https://arxiv.org/abs/2305.17325) and computational resources? 
 
-I prefer solutions that possess simplicity, exhibit strong generalizability, and grounded in theory.
+I prefer solutions that are simple, generalizable, and theoretically sound.
 
-Previously, I was working as a research intern at the Knowledge Engineering Group of Tsinghua University, under the supervision of [Jie Tang](http://keg.cs.tsinghua.edu.cn/jietang/). I have built a 1B decoder-only multilingual language model mGLM, which excels in multilingual generation tasks due to its autoregressive denoising pre-train objective. mGLM is now [open sourced](https://github.com/THUDM/Multilingual-GLM).
+Previously, I worked as a research intern in the Knowledge Engineering Group of Tsinghua University, under the supervision of [Jie Tang](http://keg.cs.tsinghua.edu.cn/jietang/). I have built a 1B decoder-only multilingual language model mGLM, which excels in multilingual generation tasks due to its autoregressive denoising pre-train objective. mGLM is now [open sourced](https://github.com/THUDM/Multilingual-GLM).
 
 If you have anything to share with me, please feel free to contact me through my email: tli104 at jhu.edu
 
