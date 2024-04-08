@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I will be staying at Johns Hopkins University for my phd, working with Prof. [Daniel Khashabi](https://danielkhashabi.com/)!
+I will be staying at Johns Hopkins University for my PhD, working with Prof. [Daniel Khashabi](https://danielkhashabi.com/)!
