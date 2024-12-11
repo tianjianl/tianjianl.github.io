@@ -144,7 +144,7 @@
 
 <ul>
   <li>
-    <p><strong>Likelihood Displacement</strong>: The likelihood of the chosen and the rejected response simultaneously decreases. Existing work accounts this to either the edit distance between the chosen and the rejected is short (<a href="https://arxiv.org/abs/2402.13228" rel="external nofollow noopener" target="_blank">Pal et al., 2024</a>) or the embedding distance the chosen and rejected is short (<a href="https://arxiv.org/abs/2410.08847v2" rel="external nofollow noopener" target="_blank">Razin et al., 2024</a>). To similar pairs make the model fail to differentiate between the chosen and the rejected, resulting in the model simutaneously reducing the likelihood of both.</p>
+    <p><strong>Likelihood Displacement</strong>: The likelihood of the chosen and the rejected response simultaneously decreases. Existing work accounts this to either the edit distance between the chosen and the rejected is short (<a href="https://arxiv.org/abs/2402.13228" rel="external nofollow noopener" target="_blank">Pal et al., 2024</a>) or the embedding distance the chosen and rejected is small (<a href="https://arxiv.org/abs/2410.08847v2" rel="external nofollow noopener" target="_blank">Razin et al., 2024</a>). Too similar pairs make the model fail to differentiate between the chosen and the rejected, resulting in the model simutaneously reducing the likelihood of both.</p>
   </li>
   <li>
     <p><strong>Poor Ranking Accuracy</strong>: Even after DPO, the model fails to assign higher probability to chosen responses compared to rejected responses (<a href="https://arxiv.org/abs/2405.19534" rel="external nofollow noopener" target="_blank">Chen et al., 2024</a>). This is an expected outcome due to likelihood displacement.</p>
@@ -154,32 +154,32 @@
   </li>
 </ul>
 
-<p>A natural question arises: <strong>despite all these criticisms, while is vanilla DPO still the go-to algorithm when aligning language models?</strong></p>
+<p>A natural question arises: <strong>despite all these criticisms, why is vanilla DPO still the go-to algorithm when aligning language models?</strong></p>
 
 <p>In this blogpost, I aim to give a non-rigorous explanation of the following two research questions:</p>
 
 <ul>
   <li>Why does the likelihood displacement phenomenon occur?</li>
-  <li>Why do DPO work well despite the aforementioned three shortcomings.</li>
+  <li>Why DPO works despite likelihood displacement on off-policy data?</li>
 </ul>
 
 <p>By answering these questions, I aim to defend against vanilla DPO for alignment, and to shed light on a deeper understanding of what DPO is doing to our model.</p>
 <h3 id="preliminaries">Preliminaries:</h3>
 
-<p>We are working with for a given user prompt \(x\), the language model \(\pi(\cdot \mid x)\) yields a probablity distribution over all possible responses \(\mathbf{y}\).</p>
+<p>For a given user prompt \(x\), the language model \(\pi(\cdot \mid x)\) yields a probablity distribution over all possible responses \(\mathbf{y}\).</p>
 
-<p>The pipeline begins with training the base language model \(\pi_\text{base}\) on good generations \(\mathcal{D}_\text{SFT} = \{(x, \mathbf{y}), ...\}\). The SFT loss is given by</p>
+<p>The pipeline begins with training the base language model \(\pi_\text{base}\) on high-quality generations \(\mathcal{D}_\text{SFT} = \{(x, \mathbf{y}), ...\}\). The SFT loss is given by</p>
 
 \[\mathcal{L}_\textrm{SFT} = - \log \pi(\mathbf{y} \mid x)\]
 
-<p>This stage of the pipeline is called Supervised Fine-Tuning (SFT). Which produces the SFT’ed model \(\pi_\textrm{SFT}\).</p>
+<p>This stage of the pipeline is called Supervised Fine-Tuning (SFT), which produces the SFT’ed model \(\pi_\textrm{SFT}\).</p>
 
 <p>Then there is another dataset \(\mathcal{D}_\textrm{DPO} = \{(x, \mathbf{y}_w, \mathbf{y}_l) ... \}\), where there are two generations \((y_w, y_l)\) for a given prompt \(x\), where \(\mathbf{y}_w\) is preferred (usually referred to as the “winning” or “chosen” response), and \(\mathbf{y}_l\) is dispreferred (usually referred to as the “losing” or “rejected” response). 
 The DPO loss is given by:</p>
 
 \[\mathcal{L}_\textrm{DPO} = -\log \sigma\left(\beta\log \frac{\pi_\theta(\mathbf{y}_w \mid x)}{\pi_\text{SFT}(\mathbf{y}_w \mid x)} - \beta\log\frac{\pi_{\theta}(\mathbf{y}_l \mid x)}{\pi_\textrm{SFT}(\mathbf{y}_l \mid x)}\right),\]
 
-<p>which aims to maximize the margin between the log-likelihood between the chosen response and the rejected responses. In an ideal setting, this loss should push log-likelihood of the chosen response higher and push the log-likelihood of the rejected response lower, making the preferred response more likely under the aligned model.</p>
+<p>which aims to maximize the margin between the increase in log-probability of the chosen response \(\log \pi_\theta(\mathbf{y}_w \mid x) - \log \pi_\text{SFT}(\mathbf{y}_w \mid x)\), and the increase in log-probability of the rejected response \(\log \pi_\theta(\mathbf{y}_l \mid x) - \log \pi_\text{SFT}(\mathbf{y}_l \mid x)\). In an ideal setting, the DPO loss should push the log-likelihood of the chosen response higher and push the log-likelihood of the rejected response lower, making the preferred response more likely under the aligned model.</p>
 
 <p>However, as many works have noticed (<a href="https://arxiv.org/abs/2404.12358" rel="external nofollow noopener" target="_blank">Rafailov et al., 2024</a>, <a href="https://arxiv.org/abs/2402.13228" rel="external nofollow noopener" target="_blank">Pal et al., 2024</a>, <a href="https://arxiv.org/abs/2410.08847v2" rel="external nofollow noopener" target="_blank">Razin et al., 2024</a>, <a href="https://arxiv.org/abs/2404.04626" rel="external nofollow noopener" target="_blank">Feng et al., 2024</a>), often times the <strong>likelihood of both the chosen and the rejected response goes down</strong>, a phenomenon that <a href="https://arxiv.org/abs/2410.08847v2" rel="external nofollow noopener" target="_blank">Razin et al., 2024</a> terms “likelihood displacement”. In this blogpost, I would like to offer another explanation of why does “likelihood displacement” happens and more interestingly, why DPO is a strong baselines despite “likelihood displacement”. To this, we first need to investigate the effect of DPO onto the language modeling distribution — “The Squeezing Effect”.</p>
 
@@ -281,7 +281,7 @@ is actually a strong baseline, and training a language model on high-likelihood 
   </li>
 </ul>
 
-<p>Now, It should be intuitive that why DPO (even the offline variant) is able to yield a strong baseline - it “squeezes” or “sharpens” up the log-likelihood of sentences with already large log-probability, regardless of the winning and losing response construction (because it is very unlikely that the winning and / or the losing response is \(\mathbf{y}^*\)).</p>
+<p>Now, It should be intuitive that why DPO (even the offline variant) is able to yield a strong baseline - it “squeezes” or “sharpens” up the log-likelihood of sentences with already large log-probability, regardless of the winning and losing response construction (because it is very unlikely that the winning and / or the losing response is \(\mathbf{y}^*\)). There is also empirical evidence that performing vanilla DPO on “wrong-over-wrong” responses (<a href="https://arxiv.org/abs/2410.11055" rel="external nofollow noopener" target="_blank">Yao et al., 2024</a>) can improve performance.</p>
 
 <h2 id="limitations">Limitations</h2>
 
