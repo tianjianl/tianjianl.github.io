@@ -15,7 +15,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Hi👋, I'm Tianjian! I'm a PhD student in Computer Science at Johns Hopkins University, proudly advised by Prof. [Daniel Khashabi](https://danielkhashabi.com/). Previously, I completed my Master's degree in Computer Science at JHU, where I had the privilege of working closely with my wonderful advisors, [Kenton Murray](https://kentonmurray.com/) and [Philipp Koehn](https://www.cs.jhu.edu/~phi/).
+Hi👋, I'm Tianjian! I'm a PhD student in Computer Science at Johns Hopkins University, proudly advised by Prof. [Daniel Khashabi](https://danielkhashabi.com/). Previously, I completed my Master's degree in Computer Science at JHU, where I had the privilege of working closely with my wonderful advisors, [Kenton Murray](https://kentonmurray.com/) and [Philipp Koehn](https://www.cs.jhu.edu/~phi/). Before that, I was an undergraduate at New York University.
 
 My research lies at the intersection between machine learning and natural language processing.
 
