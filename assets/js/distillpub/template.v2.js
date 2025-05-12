@@ -943,9 +943,6 @@ ${math}
       cite += link_string(ent) + "<br>";
       if (ent.author) {
         cite += author_string(ent, "${L}, ${I}", ", ", " and ");
-        if (ent.year || ent.date) {
-          cite += ", ";
-        }
       }
       if (ent.year || ent.date) {
         cite += (ent.year || ent.date) + ". ";
