@@ -3,13 +3,13 @@
     <h3 class="fw-bold border-bottom pb-3 mb-5">Selected Works</h3>
     {% for item in site.data.publications.selected %}
       <div class="row mb-5 align-items-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
           <a href="{{ item.url }}" style="color: #2a6496 !important; text-decoration: none; font-weight: 600; font-size: 1.2rem;">{{ item.title }}</a><br>
           <span style="color: #555;">{{ item.authors | replace: 'Tianjian Li', '<strong>Tianjian Li</strong>' }}</span><br>
           {{ item.venue }}{% if item.code %} &middot; <a href="{{ item.code }}" style="color: #2a6496 !important; text-decoration: none;">Code</a>{% endif %}
-          {% if item.abstract %}<p class="mt-2 mb-0">{{ item.abstract }}</p>{% endif %}
+          {% if item.abstract %}<p class="mt-4 mb-0">{{ item.abstract }}</p>{% endif %}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           {% if item.image and item.image != '' %}
             <img src="{{ site.github.url }}/{{ item.image }}" alt="{{ item.title }}" width="100%">
           {% else %}
