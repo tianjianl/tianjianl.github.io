@@ -1,25 +1,12 @@
-source 'https://rubygems.org'
-group :jekyll_plugins do
-    gem 'classifier-reborn'
-    gem 'jekyll'
-    gem 'jekyll-archives'
-    gem 'jekyll-diagrams'
-    gem 'jekyll-email-protect'
-    gem 'jekyll-feed'
-    gem 'jekyll-imagemagick'
-    gem 'jekyll-link-attributes'
-    gem 'jekyll-minifier'
-    gem 'jekyll-paginate-v2'
-    gem 'jekyll-scholar'
-    gem 'jekyll-sitemap'
-    gem 'jekyll-toc'
-    gem 'jekyll-twitter-plugin'
-    gem 'jemoji'
-    gem 'mini_racer'
-    gem 'unicode_utils'
-    gem 'webrick'
-end
-group :other_plugins do
-    gem 'feedjira'
-    gem 'httparty'
-end
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+gemspec
+
+# Ruby 3.0+ dropped webrick from the standard library; Jekyll 4.2's serve needs it.
+gem "webrick", "~> 1.8"
+
+# Pin Jekyll to the 4.2 line so it uses the sassc-based converter (the 4.4 line's
+# sass-embedded native binary crashes with "Broken pipe" inside this container).
+gem "jekyll", "~> 4.2.0"
+gem "jekyll-sass-converter", "~> 2.0"

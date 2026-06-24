@@ -1,0 +1,12 @@
+menu:
+- {name: 'publications', url: '/publications'}
+- {name: 'blog', url: '/blog'}
+- {name: 'cv', url: '/assets/pdf/CV.pdf'}
+
+social:
+- {icon: 'github', link: 'https://github.com/tianjianl'}
+- {icon: 'twitter', link: 'https://twitter.com/tli104'}
+- {icon: 'envelope', link: 'mailto:tli104@jhu.edu'}
+
+contacts:
+- {name: 'Tianjian Li', title: 'PhD Student', department: 'Computer Science', institution: 'Johns Hopkins University', institution_address: 'Baltimore, MD', phone: '', email: 'tli104@jhu.edu', office: '', image: 'assets/img/contact.jpg'}
