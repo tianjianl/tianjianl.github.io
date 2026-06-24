@@ -18,7 +18,7 @@ layout: default
 </div>
 
 <div class="row g-5 mb-5">
-  <div class="col-md-12">
+  <div class="col-md-12 updates-section">
     <h3 class="fw-bold border-bottom pb-3 mb-5">Updates</h3>
     {% for post in site.posts limit:8 %}
       <p><strong>{{ post.date | date: "%B %Y" }}.</strong> {{ post.content | replace: '<p>', '' | replace: '</p>', '' | strip }}</p>
