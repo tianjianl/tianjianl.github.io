@@ -5,7 +5,7 @@ menu:
 
 social:
 - {icon: 'github', prefix: 'fab', link: 'https://github.com/tianjianl'}
-- {icon: 'google-scholar', prefix: 'fab', link: 'https://scholar.google.com/citations?user=YOUR_ID_HERE'}
+- {icon: 'google-scholar', prefix: 'fab', link: 'https://scholar.google.com/citations?user=q3MvyewAAAAJ&hl=en'}
 - {icon: 'twitter', prefix: 'fab', link: 'https://twitter.com/tli104'}
 - {icon: 'envelope', prefix: 'fas', link: 'mailto:tli104@jhu.edu'}
 
