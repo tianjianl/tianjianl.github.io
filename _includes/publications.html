@@ -6,7 +6,7 @@
         <div class="col-md-9">
           <a href="{{ item.url }}" style="color: #2a6496 !important; text-decoration: none; font-weight: 600; font-size: 1.2rem;">{{ item.title }}</a><br>
           <span style="color: #555;">{{ item.authors | replace: 'Tianjian Li', '<strong>Tianjian Li</strong>' }}</span><br>
-          {{ item.venue }}{% if item.code %} &middot; <a href="{{ item.code }}" style="color: #2a6496 !important; text-decoration: none;">Code</a>{% endif %}
+          {{ item.venue }}{% if item.code %} &middot; <a href="{{ item.code }}" style="color: #2a6496 !important; text-decoration: none;">Code</a>{% endif %}{% if item.dataset %} &middot; <a href="{{ item.dataset }}" style="color: #2a6496 !important; text-decoration: none;">Dataset</a>{% endif %}
           {% if item.abstract %}<p class="mt-4 mb-0">{{ item.abstract }}</p>{% endif %}
         </div>
         <div class="col-md-3">

@@ -1,4 +1,11 @@
 selected:
+- title: 'HackBench: Detecting and Localizing Reward Hacking in Autoresearch Agents'
+  authors: 'Tianjian Li, Seungone Kim, Eryk Helenowski, Jason Weston, Ilia Kulikov, Jack Lanchantin, Weizhe Yuan'
+  venue: 'Blog post, October 2026'
+  url: 'https://facebookresearch.github.io/RAM/blogs/hackbench/'
+  dataset: 'https://huggingface.co/datasets/facebook/hackbench'
+  image: 'assets/img/hackbench.png'
+  abstract: 'We introduce HackBench, a benchmark for detecting and localizing reward hacking in long autoresearch trajectories. It combines naturally occurring and synthetically injected hacks with audited command-level labels; evaluations show that even frontier language models miss many hacks.'
 - title: 'Self-Compacting Language Model Agents'
   authors: 'Tianjian Li, Jingyu Zhang, William Jurayj, Xi Wang, Chuanyang Jin, Mehrdad Farajtabar, Eric Nalisnick, Daniel Khashabi'
   venue: 'NeurIPS 2026'
