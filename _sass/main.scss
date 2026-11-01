@@ -21,3 +21,19 @@ body a {
   color: #2a6496 !important;
   text-decoration: none;
 }
+
+.job-market-callout {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid #2a6496;
+  border-radius: 0.25rem;
+  background: #f0f6fb;
+
+  a {
+    color: #2a6496 !important;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
