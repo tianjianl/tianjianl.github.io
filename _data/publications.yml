@@ -35,6 +35,10 @@ selected:
   abstract: 'We propose Error Norm Truncation, a robust training objective that down-weights noisy training examples using a more accurate estimate of sample quality than the loss alone. It improves the quality and robustness of text generation models across machine translation, summarization, and language modeling.'
 
 full:
+- title: 'Aligning Autoresearch: Co-Improvement between Agents and Humans'
+  authors: 'Tianjian Li, Chuanyang Jin, Seungone Kim, Tong Chen, John Hoffman, Yoram Bachrach, Pedro Rodriguez, Ping Yu, Eryk Helenowski, Swarnadeep Saha, Jack Lanchantin, Weizhe Yuan, Ilia Kulikov, Jason Weston'
+  venue: 'arXiv preprint'
+  url: 'https://arxiv.org/abs/2610.38882'
 - title: 'Self-Compacting Language Model Agents'
   authors: 'Tianjian Li, Jingyu Zhang, William Jurayj, Xi Wang, Chuanyang Jin, Mehrdad Farajtabar, Eric Nalisnick, Daniel Khashabi'
   venue: 'NeurIPS 2026'
