@@ -76,7 +76,7 @@ full:
   venue: 'NAACL 2025'
   url: 'https://arxiv.org/abs/2410.04579'
 - title: 'Benchmarking Language Model Creativity: A Case Study on Code Generation'
-  authors: 'Yining Lu, Dixuan Wang, Tianjian Li, Dongwei Jiang, Daniel Khashabi'
+  authors: 'Yining Lu, Dixuan Wang, Tianjian Li, Dongwei Jiang, Sanjeev Khudanpur, Meng Jiang, Daniel Khashabi'
   venue: 'NAACL 2025'
   url: 'https://arxiv.org/abs/2407.09007'
 - title: 'Verifiable by Design: Aligning Language Models to Quote from Pre-Training Data'
