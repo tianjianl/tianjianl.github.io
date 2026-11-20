@@ -15,7 +15,7 @@ If you have anything to share with me, please feel free to contact me through my
 
 **I'm seeking industry research roles with a 2027 start date.**
 
-My research interests include **RL & post-training** \[[1](https://arxiv.org/abs/2509.02534)\], **long-horizon agents** \[[2](https://arxiv.org/abs/2606.23525), [3](https://facebookresearch.github.io/RAM/blogs/hackbench/)\], and **model diversity & creativity** \[[1](https://arxiv.org/abs/2509.02534), [4](https://arxiv.org/abs/2407.09007)\].
+My research interests include **RL & post-training** \[[1](https://arxiv.org/abs/2509.02534)\], **reward hacking** \[[2](https://facebookresearch.github.io/RAM/blogs/hackbench/)\] and **context management** \[[3](https://arxiv.org/abs/2606.23525)\] in long-horizon agents, and **model diversity & creativity** \[[1](https://arxiv.org/abs/2509.02534), [4](https://arxiv.org/abs/2407.09007)\].
 
 Please feel free to [reach out](mailto:tli104@jhu.edu) if you see a fit! [CV (PDF)]({{ '/assets/pdf/CV.pdf' | relative_url }})
 
